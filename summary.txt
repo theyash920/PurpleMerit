@@ -1,0 +1,95 @@
+================================================================================
+  AGENTIC RAG COURSE PLANNING ASSISTANT — 1-PAGE SUMMARY
+  Purple Merit Technologies Agentic RAG Challenge
+================================================================================
+
+OVERVIEW
+--------
+This project implements a four-agent Agentic Retrieval-Augmented Generation (RAG)
+system for academic course planning, built with CrewAI and powered by Groq's Llama
+3.3 70B model. The system answers student questions about Stanford University's CS
+curriculum — including prerequisite eligibility, multi-hop prerequisite chains,
+program requirements, and academic policies — while grounding every claim in
+verifiable catalog citations and safely abstaining when information is unavailable.
+
+ARCHITECTURE
+------------
+The pipeline processes each query through four sequential agents:
+
+  1. INTAKE AGENT: Parses the student's query, identifies the question type
+     (prerequisite check, course plan, program info, policy question), and
+     generates clarifying questions if essential context is missing (e.g.,
+     completed courses, target term, or major).
+
+  2. CATALOG RETRIEVER AGENT: Executes a hybrid retrieval pipeline against a
+     ChromaDB vector store. Queries are classified by intent (course/program/
+     policy) to apply metadata filters and dynamic top-k selection. Candidates
+     are semantically retrieved using BAAI/bge-base-en-v1.5 embeddings, then
+     re-ranked by an LLM relevance scorer via Groq.
+
+  3. PLANNER AGENT: Reasons strictly over retrieved context with chain-of-thought
+     (CoT) traces. For prerequisite checks, it performs step-by-step requirement
+     matching. For course plans, it filters by satisfied prerequisites and credit
+     limits. When the retrieved documents lack the answer, it abstains explicitly.
+
+  4. VERIFIER AGENT: Audits every claim for citation grounding (minimum 1 URL per
+     factual claim), enforces the mandatory output format, strips internal
+     reasoning traces, and blocks or rewrites weakly grounded responses.
+
+DATA CURATION
+-------------
+The knowledge base consists of 20 enriched course files, 2 program requirement
+files, and 1 academic policy file, all sourced from Stanford's public catalog.
+Course files are chunked as single units to preserve prerequisite logic integrity.
+Program and policy files are split at section headers for granular retrieval. Each
+chunk carries rich metadata: title, source URL, section name, document type,
+prerequisites, and minimum grade requirements.
+
+KEY DESIGN DECISIONS & TRADEOFFS
+---------------------------------
+• Structure-aware chunking (1 chunk per course vs. section-split for larger docs)
+  ensures prerequisite logic is never fragmented, at the cost of larger chunk sizes.
+• Hybrid retrieval with metadata filtering reduces irrelevant cross-type matches
+  (e.g., a course query won't surface policy chunks first).
+• LLM-based re-ranking improves precision over pure cosine similarity but adds
+  latency and one extra Groq API call per retrieval.
+• Four-agent separation of concerns enables independent auditing and safe abstention,
+  but the sequential pipeline increases end-to-end latency compared to a monolithic
+  RAG approach.
+• Strict citation enforcement may occasionally over-censor valid reasoning if source
+  URLs are partially missing from the retrieved metadata.
+
+EVALUATION FRAMEWORK
+--------------------
+A 25-query evaluation set spans four categories:
+  • 10 prerequisite checks (eligible/not eligible decisions)
+  • 5 multi-hop chain questions (requiring 2+ courses of evidence)
+  • 5 program requirement questions
+  • 5 "not-in-docs" abstention questions (trick questions)
+
+Metrics tracked: Citation Coverage Rate, Abstention Accuracy, and Eligibility
+Correctness. Three detailed interaction transcripts are saved for qualitative review.
+
+TECH STACK
+----------
+  LLM:          Groq API — Llama 3.3 70B Versatile
+  Embeddings:   BAAI/bge-base-en-v1.5 (HuggingFace SentenceTransformers, free)
+  Vector Store: ChromaDB (local, persistent)
+  Framework:    CrewAI (4-agent sequential process)
+  UI:           Streamlit (optional web interface)
+  Language:     Python 3.10+
+
+FILES
+-----
+  config.py      — Centralized settings, API keys, paths, retrieval parameters
+  ingest.py      — Document loading, structure-aware chunking, vectorstore builder
+  retriever.py   — Hybrid retrieval with intent classification and LLM re-ranking
+  agents.py      — Four CrewAI agent definitions with custom catalog search tool
+  tasks.py       — Four sequential task definitions for the pipeline
+  crew.py        — Crew assembly and single-function execution entry point
+  evaluate.py    — 25-query evaluation framework with metrics logging
+  main.py        — CLI entry point (ingest / ask / interactive / evaluate)
+  app.py         — Streamlit web UI with chat interface and pipeline visualization
+  data/          — 20 courses + 2 programs + 1 policy + sources.md
+
+================================================================================

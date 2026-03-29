@@ -1,0 +1,61 @@
+TYPE: policy
+
+POLICY: Academic Grading Policy
+
+DESCRIPTION:
+Stanford University uses a letter grading system for undergraduate and graduate courses.
+Grades are a measure of student achievement and are assigned by instructors based on
+coursework, examinations, and participation.
+
+GRADING SCALE:
+- A+, A, A-: Excellent (4.0, 4.0, 3.7)
+- B+, B, B-: Good (3.3, 3.0, 2.7)
+- C+, C, C-: Satisfactory (2.3, 2.0, 1.7)
+- D+, D, D-: Passing (1.3, 1.0, 0.7)
+- NP: Not Passed (0.0, not factored into GPA)
+- CR: Credit (satisfactory completion, not factored into GPA)
+- W: Withdrawal (no GPA impact)
+- I: Incomplete (temporary, must be resolved within 1 year)
+
+GRADE REQUIREMENTS FOR MAJORS:
+- Courses taken to fulfill major requirements must be taken for a LETTER GRADE (not CR/NC)
+- A minimum grade of C- is required for prerequisite courses unless otherwise specified
+- A cumulative GPA of 2.0 in major courses is required for graduation
+- Courses with a grade of D or below do not satisfy prerequisite requirements
+- Only one D grade may count toward the major with department approval
+
+REPEATING COURSES:
+- Students may repeat a course to improve a grade
+- Both the original and new grade appear on the transcript
+- Only the most recent grade is used in GPA calculation
+- A course may be repeated at most once
+- Courses originally taken CR/NC cannot be repeated for a letter grade
+
+CREDIT LIMITS:
+- Maximum of 20 units per quarter for undergraduates
+- Minimum of 12 units per quarter for full-time status
+- Summer quarter has a limit of 10 units per session
+- Students on academic probation may be limited to 15 units per quarter
+
+INCOMPLETES:
+- An Incomplete (I) grade is granted at the instructor's discretion
+- Work must be completed within 1 calendar year or the grade converts to NP
+- Students with more than 2 outstanding Incompletes may not enroll in additional courses
+
+ACADEMIC PROBATION:
+- Students whose quarterly GPA falls below 2.0 are placed on academic probation
+- Two consecutive quarters on probation may result in required leave of absence
+- Students on probation must meet with their academic advisor each quarter
+
+TRANSFER CREDITS:
+- Transfer credits from other institutions may satisfy some requirements
+- Transfer credit is evaluated on a case-by-case basis by the department
+- Maximum of 45 transfer units may be applied toward a Stanford degree
+- Transfer courses must have a grade of C or better to receive credit
+- Graduate-level courses from other institutions require department chair approval
+
+HONORS:
+- Distinction: cumulative GPA of 3.5 or above in the major
+- With Honors: completion of an honors thesis with distinction grade
+
+SOURCE: https://exploredegrees.stanford.edu/academicpoliciesandstatements/

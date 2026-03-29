@@ -1,0 +1,34 @@
+TYPE: course
+
+COURSE: CS143
+TITLE: Compilers
+
+LEVEL: undergraduate
+
+DESCRIPTION:
+Principles and practices for design and implementation of compilers and interpreters. Topics include lexical analysis, parsing theory, type checking, code generation and optimization. Students will build a working compiler for a substantial programming language as a course project. Covers formal language theory as applied to compiler construction, including regular expressions, context-free grammars, and attribute grammars.
+
+PREREQUISITES:
+CS107 AND CS103
+
+PREREQ_LOGIC:
+* Both CS107 and CS103 must be completed.
+
+PREREQUISITE_TYPE: all_required
+
+CO-REQUISITES:
+None
+
+MINIMUM_GRADE:
+N/A
+
+UNITS:
+4
+
+OFFERED:
+Fall, Spring
+
+TAGS:
+course, computer science, stanford
+
+SOURCE: https://explorecourses.stanford.edu/search?q=CS143

@@ -1,0 +1,34 @@
+TYPE: course
+
+COURSE: CS221
+TITLE: Artificial Intelligence: Principles and Techniques
+
+LEVEL: undergraduate
+
+DESCRIPTION:
+Foundational topics in artificial intelligence including search algorithms (BFS, DFS, A*, iterative deepening), adversarial game playing (minimax, alpha-beta pruning), Markov decision processes and reinforcement learning, constraint satisfaction problems, Bayesian networks and probabilistic graphical models, logical inference, and machine learning basics. Students implement AI agents for various domains. CS221 is a gateway course for the AI specialization track.
+
+PREREQUISITES:
+CS161 AND CS109
+
+PREREQ_LOGIC:
+* Both CS161 and CS109 must be completed.
+
+PREREQUISITE_TYPE: all_required
+
+CO-REQUISITES:
+None
+
+MINIMUM_GRADE:
+C+ or above in CS161
+
+UNITS:
+4
+
+OFFERED:
+Fall, Spring
+
+TAGS:
+course, computer science, stanford
+
+SOURCE: https://explorecourses.stanford.edu/search?q=CS221

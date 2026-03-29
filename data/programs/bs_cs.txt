@@ -1,0 +1,45 @@
+TYPE: program
+
+PROGRAM: Bachelor of Science in Computer Science
+
+DESCRIPTION:
+The undergraduate major in Computer Science at Stanford University offers a broad and rigorous
+curriculum in the theory and application of computing. The program prepares students for careers
+in software engineering, research, entrepreneurship, and graduate study in computer science.
+
+REQUIREMENTS:
+
+Core Requirements (all mandatory):
+- CS106A: Programming Methodology (5 units)
+- CS106B: Programming Abstractions (5 units)
+- CS103: Mathematical Foundations of Computing (5 units)
+- CS107: Computer Organization and Systems (5 units)
+- CS109: Introduction to Probability for Computer Scientists (5 units)
+- CS111: Operating Systems Principles (5 units)
+- CS161: Design and Analysis of Algorithms (5 units)
+
+Mathematics Requirements (all mandatory):
+- MATH51: Linear Algebra, Multivariable Calculus, and Modern Applications (5 units)
+
+Engineering Fundamentals (choose one):
+- ENGR40M: An Intro to Making: What is EE (5 units)
+- Or another approved engineering fundamentals course
+
+Senior Project:
+- Students must complete a senior project or honors thesis in their final year.
+
+Track Electives:
+- Students must choose a specialization track (AI, Systems, Theory, HCI, etc.)
+- Each track requires 3-4 additional upper-division CS courses (numbered 100+)
+- At least 2 elective courses must be at the 200-level or above
+
+Total Units for Major: minimum 80 units
+Residency Requirement: At least 45 units must be completed at Stanford (not transfer credit)
+Minimum GPA: 2.0 cumulative GPA in major courses required for graduation
+
+Academic Standing:
+- Students must maintain a 2.0 GPA in all CS courses counted toward the major
+- No more than one course graded CR/NC may count toward major requirements
+- Courses with a grade of D or below do not satisfy major requirements
+
+SOURCE: https://exploredegrees.stanford.edu/schoolofengineering/computerscience/#bs_cs

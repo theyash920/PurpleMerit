@@ -1,0 +1,34 @@
+TYPE: course
+
+COURSE: CS145
+TITLE: Introduction to Databases
+
+LEVEL: undergraduate
+
+DESCRIPTION:
+Database design and use of database management systems for applications. Relational data model, SQL, database design using entity-relationship models, normalization, indexes, transactions, concurrency control and recovery. Introduction to query processing and optimization. NoSQL databases and distributed database systems. Students complete projects designing and building database-backed web applications.
+
+PREREQUISITES:
+CS103 AND CS106B
+
+PREREQ_LOGIC:
+* Both CS103 and CS106B must be completed.
+
+PREREQUISITE_TYPE: all_required
+
+CO-REQUISITES:
+None
+
+MINIMUM_GRADE:
+N/A
+
+UNITS:
+4
+
+OFFERED:
+Fall, Spring
+
+TAGS:
+course, computer science, stanford
+
+SOURCE: https://explorecourses.stanford.edu/search?q=CS145

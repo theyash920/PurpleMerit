@@ -1,0 +1,34 @@
+TYPE: course
+
+COURSE: CS161
+TITLE: Design and Analysis of Algorithms
+
+LEVEL: undergraduate
+
+DESCRIPTION:
+Worst and average case analysis. Recurrences and asymptotics. Efficient algorithms for sorting, searching, and selection. Data structures: binary search trees, heaps, hash tables, balanced trees. Algorithm design paradigms: divide and conquer, dynamic programming, greedy algorithms. Graph algorithms: shortest paths, minimum spanning trees, network flow. Intractability and NP-completeness. This is a core requirement for all CS degree programs at Stanford.
+
+PREREQUISITES:
+CS109 AND CS103
+
+PREREQ_LOGIC:
+* Both CS109 and CS103 must be completed before enrollment.
+
+PREREQUISITE_TYPE: all_required
+
+CO-REQUISITES:
+None
+
+MINIMUM_GRADE:
+N/A
+
+UNITS:
+5
+
+OFFERED:
+Fall, Winter, Spring
+
+TAGS:
+course, computer science, stanford
+
+SOURCE: https://explorecourses.stanford.edu/search?q=CS161

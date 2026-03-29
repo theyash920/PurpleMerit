@@ -1,0 +1,32 @@
+TYPE: program
+
+PROGRAM: Minor in Computer Science
+
+DESCRIPTION:
+The minor in Computer Science provides students from other departments a focused study in
+computer science fundamentals. The minor is designed to give students proficiency in programming,
+algorithmic thinking, and computational problem-solving that complements their primary major.
+
+REQUIREMENTS:
+
+Core Requirements (all mandatory):
+- CS106A: Programming Methodology (5 units)
+- CS106B: Programming Abstractions (5 units)
+- CS103: Mathematical Foundations of Computing (5 units)
+- CS107: Computer Organization and Systems (5 units)
+
+Elective Requirements:
+- 2 additional CS courses numbered 100 or higher (minimum 3 units each)
+- Elective courses must be taken for a letter grade (not CR/NC)
+- At least 1 elective must be at the 100-level or above and not cross-listed with the student's major
+
+Total Units for Minor: minimum 28 units
+Overlap Policy: At most 2 courses may overlap with the student's major requirements
+Residency Requirement: At least 3 of the 6 required courses must be completed at Stanford
+
+APPLICATION PROCESS:
+- Students must declare the minor by the end of their junior year
+- Declaration requires advisor approval from the CS department
+- Transfer credits may satisfy up to 1 core requirement with department approval
+
+SOURCE: https://exploredegrees.stanford.edu/schoolofengineering/computerscience/#minor_cs

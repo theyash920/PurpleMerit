@@ -10,6 +10,7 @@ Pipeline:
 """
 import os
 import re
+import time
 import chromadb
 from sentence_transformers import SentenceTransformer
 from groq import Groq
@@ -131,7 +132,8 @@ def retrieve(query: str, k: int | None = None, doc_type_filter: str | None = Non
             **(results["metadatas"][0][i] if results["metadatas"][0][i] else {}),
         })
 
-    return candidates[:k] if len(candidates) <= k else rerank(query, candidates, k)
+    # Skip LLM reranking (disabled for TPM budget) — return top-k by similarity
+    return candidates[:k]
 
 
 # ─── LLM Re-ranking ─────────────────────────────────────────────────────────
@@ -140,7 +142,8 @@ def rerank(query: str, candidates: list[dict], k: int) -> list[dict]:
     """
     Re-rank candidates using Groq LLM scoring.
     Asks the LLM to score each candidate on a 1-10 relevance scale.
-    Returns top-k by LLM score.
+    Returns top-k by LLM score.  Includes retry with exponential backoff
+    to handle Groq rate limits gracefully.
     """
     groq = _get_groq()
 
@@ -164,33 +167,43 @@ Return ONLY a JSON array of objects with "index" and "score" keys, sorted by sco
 Example: [{{"index": 2, "score": 9}}, {{"index": 0, "score": 7}}]
 """
 
-    try:
-        response = groq.chat.completions.create(
-            model=config.LLM_MODEL,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.0,
-            max_tokens=500,
-        )
-        content = response.choices[0].message.content.strip()
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = groq.chat.completions.create(
+                model=config.LLM_MODEL,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0,
+                max_tokens=500,
+            )
+            content = response.choices[0].message.content.strip()
 
-        # Parse the JSON array
-        import json
-        # Extract JSON from potential markdown code blocks
-        json_match = re.search(r"\[.*\]", content, re.DOTALL)
-        if json_match:
-            scores = json.loads(json_match.group())
-            # Sort by score descending and pick top-k
-            scores.sort(key=lambda x: x.get("score", 0), reverse=True)
-            reranked = []
-            for entry in scores[:k]:
-                idx = entry["index"]
-                if 0 <= idx < len(candidates):
-                    candidates[idx]["rerank_score"] = entry["score"]
-                    reranked.append(candidates[idx])
-            if reranked:
-                return reranked
-    except Exception as e:
-        print(f"[Retriever] Re-ranking failed ({e}), falling back to similarity order.")
+            # Parse the JSON array
+            import json
+            # Extract JSON from potential markdown code blocks
+            json_match = re.search(r"\[.*\]", content, re.DOTALL)
+            if json_match:
+                scores = json.loads(json_match.group())
+                # Sort by score descending and pick top-k
+                scores.sort(key=lambda x: x.get("score", 0), reverse=True)
+                reranked = []
+                for entry in scores[:k]:
+                    idx = entry["index"]
+                    if 0 <= idx < len(candidates):
+                        candidates[idx]["rerank_score"] = entry["score"]
+                        reranked.append(candidates[idx])
+                if reranked:
+                    return reranked
+            break  # Parsed OK but no results — fall through to fallback
+        except Exception as e:
+            err_str = str(e).lower()
+            if ("rate_limit" in err_str or "429" in err_str or "too many" in err_str) and attempt < max_retries - 1:
+                wait = (attempt + 1) * 15  # 15s, 30s, 45s
+                print(f"[Retriever] Rate-limited on rerank (attempt {attempt+1}), waiting {wait}s...")
+                time.sleep(wait)
+            else:
+                print(f"[Retriever] Re-ranking failed ({e}), falling back to similarity order.")
+                break
 
     # Fallback: return top-k by original similarity
     return sorted(candidates, key=lambda x: x.get("score", 0), reverse=True)[:k]
@@ -205,18 +218,15 @@ def hybrid_retrieve(query: str) -> list[dict]:
     2. Retrieve with metadata filter
     3. Re-rank
     Returns citation-ready results.
+
+    Includes inter-call delays to respect Groq TPM limits.
     """
     intent = classify_query(query)
 
     if intent == "course":
-        # For course queries, search courses first, then add program context
-        course_results = retrieve(query, k=config.RETRIEVAL_K_COURSES, doc_type_filter="course")
-        program_results = retrieve(query, k=2, doc_type_filter="program")
-        return course_results + program_results
+        return retrieve(query, k=config.RETRIEVAL_K_COURSES, doc_type_filter="course")
     elif intent == "program":
-        program_results = retrieve(query, k=config.RETRIEVAL_K_PROGRAMS, doc_type_filter="program")
-        course_results = retrieve(query, k=2, doc_type_filter="course")
-        return program_results + course_results
+        return retrieve(query, k=config.RETRIEVAL_K_PROGRAMS, doc_type_filter="program")
     elif intent == "policy":
         return retrieve(query, k=config.RETRIEVAL_K_PROGRAMS, doc_type_filter="policy")
     else:

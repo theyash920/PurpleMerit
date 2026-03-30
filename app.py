@@ -250,7 +250,7 @@ def run_ingest():
 
 
 def run_query(question: str) -> str:
-    """Run the full CrewAI pipeline for a question."""
+    """Run the full CrewAI pipeline for a question, with retry on rate limit."""
     from crew import run
     return run(question, verbose=False)
 
@@ -409,13 +409,9 @@ st.markdown("""
     <h1>🎓 Stanford Course Planning Assistant</h1>
     <p>Agentic RAG system with grounded reasoning, prerequisite analysis, and verifiable citations</p>
     <div style="margin-top: 1rem;">
-        <span class="pipeline-step">🔍 Intake</span>
-        <span class="pipeline-arrow">→</span>
         <span class="pipeline-step">📚 Retrieve</span>
         <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step">🧠 Plan</span>
-        <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step">✅ Verify</span>
+        <span class="pipeline-step">🧠 Plan & Verify</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -506,14 +502,10 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
         st.rerun()
     else:
         # Show processing indicator
-        with st.status("🔄 Processing through 4-agent pipeline...", expanded=True) as status:
-            st.write("🔍 **Agent 1:** Intake Agent — parsing student profile...")
+        with st.status("🔄 Processing through 2-agent pipeline...", expanded=True) as status:
+            st.write("📚 **Agent 1:** Catalog Retriever — searching catalog...")
             time.sleep(0.3)
-            st.write("📚 **Agent 2:** Catalog Retriever — hybrid search & reranking...")
-            time.sleep(0.3)
-            st.write("🧠 **Agent 3:** Planner Agent — reasoning over retrieved context...")
-            time.sleep(0.3)
-            st.write("✅ **Agent 4:** Verifier Agent — auditing citations & format...")
+            st.write("🧠 **Agent 2:** Planner — reasoning & verifying citations...")
 
             try:
                 response = run_query(last_msg["content"])

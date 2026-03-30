@@ -122,6 +122,4 @@ Clarifying questions (if needed): [Questions or N/A]
 Assumptions / Not in catalog: [Assumptions or guidance]
 ```
 
-## License
 
-MIT

@@ -11,10 +11,11 @@ load_dotenv()
 # ─── API Keys ────────────────────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
-# ─── LLM Configuration ──────────────────────────────────────────────────────
+# Using llama-3.3-70b-versatile (12K TPM on free tier).
+# Optimized for 12K TPM: 2-agent pipeline, no LLM rerank, compressed prompts.
 LLM_MODEL = "llama-3.3-70b-versatile"
 LLM_TEMPERATURE = 0.1
-LLM_MAX_TOKENS = 4096
+LLM_MAX_TOKENS = 300
 
 # ─── Embedding Configuration ────────────────────────────────────────────────
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
@@ -30,10 +31,10 @@ PROGRAMS_DIR = os.path.join(DATA_DIR, "programs")
 POLICIES_DIR = os.path.join(DATA_DIR, "policies")
 
 # ─── Retrieval Parameters ───────────────────────────────────────────────────
-RETRIEVAL_K_COURSES = 3       # Top-k for course-specific queries
-RETRIEVAL_K_PROGRAMS = 5      # Top-k for program/policy queries
-RETRIEVAL_K_DEFAULT = 5       # Default top-k
-RERANK_CANDIDATES = 10        # Fetch this many candidates before re-ranking
+RETRIEVAL_K_COURSES = 2       # Top-k for course-specific queries (reduced for TPM)
+RETRIEVAL_K_PROGRAMS = 3      # Top-k for program/policy queries (reduced for TPM)
+RETRIEVAL_K_DEFAULT = 3       # Default top-k (reduced for TPM)
+RERANK_CANDIDATES = 0         # 0 = disabled (no LLM rerank to save tokens)
 
 # ─── Output ──────────────────────────────────────────────────────────────────
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")

@@ -31,10 +31,15 @@ PROGRAMS_DIR = os.path.join(DATA_DIR, "programs")
 POLICIES_DIR = os.path.join(DATA_DIR, "policies")
 
 # ─── Retrieval Parameters ───────────────────────────────────────────────────
-RETRIEVAL_K_COURSES = 2       # Top-k for course-specific queries (reduced for TPM)
+RETRIEVAL_K_COURSES = 5       # Top-k for course-specific queries (need target + prereqs)
 RETRIEVAL_K_PROGRAMS = 3      # Top-k for program/policy queries (reduced for TPM)
-RETRIEVAL_K_DEFAULT = 3       # Default top-k (reduced for TPM)
+RETRIEVAL_K_DEFAULT = 5       # Default top-k
 RERANK_CANDIDATES = 0         # 0 = disabled (no LLM rerank to save tokens)
+
+# ─── Pipeline Settings ───────────────────────────────────────────────────────
+SLIDING_WINDOW_SIZE = 3           # Only last N messages sent to LLM
+CLASSIFIER_MAX_TOKENS = 80        # Classifier needs very few tokens
+WORKER_MAX_TOKENS = 500           # Worker agents get more room for answers
 
 # ─── Output ──────────────────────────────────────────────────────────────────
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")

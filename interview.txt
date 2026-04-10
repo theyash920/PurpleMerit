@@ -1,0 +1,33 @@
+ˀ# Project Strengths: Agentic Course Advisor
+
+Explain these 5 points to show you understand both the "AI" part and the "Engineering" part of the project.
+
+1. Smart Intent Routing (Token Efficiency)
+Strength: The project doesn't waste money. 
+Explain: I built a "Controller" that acts like a receptionist. It reads the user's message and decides which agent to call.
+ For easy questions, it uses a tiny, cheap agent. For complex course planning,
+ it calls the heavy-duty agents. This makes the system fast and cost-effective.
+
+2. Sliding Window Memory (Managing Long Chats)
+Strength: It has "Infinite Memory" without becoming slow or expensive.
+Explain: Instead of sending the entire chat history (which gets huge and expensive), I implemented a "Sliding Window."
+ It only looks at the last 3 messages but carries over a "JSON State" (a small summary) of important facts like "Courses Completed." 
+ This keeps the context small but the memory accurate.
+
+3. Accuracy-Boosted Search (RAG Optimization)
+Strength: It never misses the specific course the user is asking about.
+Explain: Basic AI search (Vector Search) sometimes misses exact names. I added "Keyword Boosting." If a user mentions "CS161,"
+ my system forces the search engine to prioritize the CS161 document.
+  This ensures the AI always has the right "Source of Truth."
+
+4. Strict Anti-Hallucination
+Strength: It is a reliable advisor that doesn't make things up.
+Explain: Academic advice must be 100% correct. I programmed the agents with strict "Guardrails." 
+If the answer isn't in the provided university catalog, the AI is instructed to say
+ "I don't have this information" rather than guessing.
+
+5. Structured Output (JSON Processing)
+Strength: The AI output is ready for other systems to use.
+Explain: My agents don't just "talk"; they return structured JSON data.
+ This allows the system to update a database or a user's profile automatically behind the scenes.
+ˀ

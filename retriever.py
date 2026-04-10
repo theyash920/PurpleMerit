@@ -68,6 +68,17 @@ POLICY_PATTERNS = re.compile(
     re.IGNORECASE,
 )
 
+# Pattern to extract specific course IDs from a query (e.g. CS161, MATH51)
+COURSE_ID_PATTERN = re.compile(
+    r"\b(CS\d{2,4}[A-Z]?|MATH\d+|ENGR\d+[A-Z]?)\b",
+    re.IGNORECASE,
+)
+
+
+def extract_course_ids(query: str) -> list[str]:
+    """Extract all course IDs mentioned in the query (uppercased)."""
+    return list(set(m.upper() for m in COURSE_ID_PATTERN.findall(query)))
+
 
 def classify_query(query: str) -> str:
     """Classify query intent into: course, program, policy, or general."""
@@ -89,6 +100,8 @@ def classify_query(query: str) -> str:
 def retrieve(query: str, k: int | None = None, doc_type_filter: str | None = None) -> list[dict]:
     """
     Perform semantic search against ChromaDB with optional metadata filtering.
+    Uses keyword boosting: documents whose course_id matches a course ID
+    mentioned in the query get priority, ensuring exact matches always appear.
     Returns list of dicts with keys: text, title, source_url, section_name, doc_type, score.
     """
     collection = _get_collection()
@@ -104,8 +117,8 @@ def retrieve(query: str, k: int | None = None, doc_type_filter: str | None = Non
         else:
             k = config.RETRIEVAL_K_DEFAULT
 
-    # Fetch more candidates for re-ranking
-    n_candidates = max(k, config.RERANK_CANDIDATES)
+    # Fetch more candidates than needed so we can boost and re-sort
+    n_candidates = max(k * 3, 10)
 
     # Embed query
     query_embedding = embedder.encode([query], normalize_embeddings=True).tolist()
@@ -132,7 +145,24 @@ def retrieve(query: str, k: int | None = None, doc_type_filter: str | None = Non
             **(results["metadatas"][0][i] if results["metadatas"][0][i] else {}),
         })
 
-    # Skip LLM reranking (disabled for TPM budget) — return top-k by similarity
+    # ── Keyword Boosting: prioritize docs that match queried course IDs ──
+    queried_ids = extract_course_ids(query)
+    if queried_ids:
+        # Separate into "exact match" (doc's course_id is in the query) and "other"
+        exact_matches = []
+        others = []
+        for c in candidates:
+            doc_course_id = c.get("course_id", "").upper()
+            if doc_course_id and doc_course_id in queried_ids:
+                exact_matches.append(c)
+            else:
+                others.append(c)
+        # Exact matches first (sorted by score), then others (sorted by score)
+        exact_matches.sort(key=lambda x: x.get("score", 0), reverse=True)
+        others.sort(key=lambda x: x.get("score", 0), reverse=True)
+        candidates = exact_matches + others
+
+    # Return top-k
     return candidates[:k]
 
 

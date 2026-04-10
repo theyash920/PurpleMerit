@@ -224,13 +224,17 @@ st.markdown("""
 # ─── Session State ───────────────────────────────────────────────────────────
 
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = []          # UI display messages
+if "pipeline_history" not in st.session_state:
+    st.session_state.pipeline_history = []  # Raw JSON history for memory extraction
 if "vectorstore_ready" not in st.session_state:
     st.session_state.vectorstore_ready = os.path.exists(
         os.path.join(os.path.dirname(__file__), "vectorstore")
     )
 if "eval_results" not in st.session_state:
     st.session_state.eval_results = None
+if "last_route" not in st.session_state:
+    st.session_state.last_route = None
 
 
 # ─── Helper Functions ────────────────────────────────────────────────────────
@@ -249,10 +253,14 @@ def run_ingest():
     st.session_state.vectorstore_ready = True
 
 
-def run_query(question: str) -> str:
-    """Run the full CrewAI pipeline for a question, with retry on rate limit."""
-    from crew import run
-    return run(question, verbose=False)
+def run_query(question: str) -> dict:
+    """Run the token-efficient pipeline for a question."""
+    from crew import run_pipeline
+    return run_pipeline(
+        question,
+        conversation_history=st.session_state.pipeline_history,
+        verbose=False,
+    )
 
 
 def format_response_sections(response: str) -> dict:
@@ -355,6 +363,8 @@ with st.sidebar:
 
     if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.messages = []
+        st.session_state.pipeline_history = []
+        st.session_state.last_route = None
         st.rerun()
 
     st.markdown("---")
@@ -409,9 +419,14 @@ st.markdown("""
     <h1>🎓 Stanford Course Planning Assistant</h1>
     <p>Agentic RAG system with grounded reasoning, prerequisite analysis, and verifiable citations</p>
     <div style="margin-top: 1rem;">
+        <span class="pipeline-step">🔀 Classify</span>
+        <span class="pipeline-arrow">→</span>
         <span class="pipeline-step">📚 Retrieve</span>
         <span class="pipeline-arrow">→</span>
         <span class="pipeline-step">🧠 Plan & Verify</span>
+    </div>
+    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.5);">
+        Token-efficient: Sliding Window (last 3) + Memory State + Agent Routing
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -468,6 +483,27 @@ for msg in st.session_state.messages:
 
         st.markdown('<div class="assistant-msg">', unsafe_allow_html=True)
 
+        if "route" in msg:
+            route_name = msg["route"]
+            if route_name == "course_planning":
+                display_text = "🤖 Agents: Retriever + Planner"
+                color = "rgba(139, 92, 246, 0.3)" # Purple
+                border = "rgba(139, 92, 246, 0.5)"
+            elif route_name == "faq":
+                display_text = "🤖 Agent: FAQ Advisor"
+                color = "rgba(16, 185, 129, 0.2)" # Green
+                border = "rgba(16, 185, 129, 0.4)"
+            elif route_name == "clarify":
+                display_text = "⚡ Router: Direct Clarification (0 Agents)"
+                color = "rgba(245, 158, 11, 0.2)" # Orange
+                border = "rgba(245, 158, 11, 0.4)"
+            else:
+                display_text = "🤖 Agent: Default"
+                color = "rgba(255,255,255,0.1)"
+                border = "rgba(255,255,255,0.2)"
+            
+            st.markdown(f'<div style="margin-bottom: 12px;"><span class="pipeline-step" style="background: {color}; border: 1px solid {border}; color: rgba(255,255,255,0.9); font-size: 0.7rem; padding: 4px 10px;">{display_text}</span></div>', unsafe_allow_html=True)
+
         if sections["answer"]:
             st.markdown(f"**📋 Answer / Plan**\n\n{sections['answer']}")
 
@@ -501,22 +537,52 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
         })
         st.rerun()
     else:
+        # Add user message to pipeline history
+        st.session_state.pipeline_history.append({
+            "role": "user",
+            "content": last_msg["content"],
+        })
+
         # Show processing indicator
-        with st.status("🔄 Processing through 2-agent pipeline...", expanded=True) as status:
-            st.write("📚 **Agent 1:** Catalog Retriever — searching catalog...")
+        with st.status("🔄 Processing through token-efficient pipeline...", expanded=True) as status:
+            st.write("🔀 **Step 1:** Classifying intent & extracting memory state...")
             time.sleep(0.3)
-            st.write("🧠 **Agent 2:** Planner — reasoning & verifying citations...")
 
             try:
-                response = run_query(last_msg["content"])
-                status.update(label="✅ Pipeline complete!", state="complete")
+                result = run_query(last_msg["content"])
+                route = result.get("route", "unknown")
+                st.session_state.last_route = route
+
+                if route == "course_planning":
+                    st.write("📚 **Step 2:** Catalog Retriever — searching catalog...")
+                    st.write("🧠 **Step 3:** Planner — reasoning & verifying citations...")
+                elif route == "faq":
+                    st.write("💡 **Step 2:** FAQ Agent — answering policy question...")
+                else:
+                    st.write("❓ **Step 2:** Requesting clarification...")
+
+                response_text = result.get("answer", str(result))
+                status.update(label=f"✅ Pipeline complete! (Route: {route})", state="complete")
+
+                # Store raw JSON in pipeline history for memory extraction
+                st.session_state.pipeline_history.append({
+                    "role": "assistant",
+                    "content": result.get("raw_json", json.dumps(result)),
+                })
+
             except Exception as e:
-                response = f"❌ An error occurred: {str(e)}\n\nPlease check your Groq API key and try again."
+                response_text = f"❌ An error occurred: {str(e)}\n\nPlease check your Groq API key and try again."
                 status.update(label="❌ Pipeline failed", state="error")
+                # Store error in pipeline history
+                st.session_state.pipeline_history.append({
+                    "role": "assistant",
+                    "content": json.dumps({"answer": response_text, "memory": {}}),
+                })
 
         st.session_state.messages.append({
             "role": "assistant",
-            "content": response,
+            "content": response_text,
+            "route": route,
             "timestamp": datetime.now().strftime("%I:%M %p"),
         })
         st.rerun()

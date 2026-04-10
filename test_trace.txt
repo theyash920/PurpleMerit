@@ -1,0 +1,628 @@
+
+======================================================================
+Question: Can I take CS161 if I have completed CS106A and CS106B?
+======================================================================
+
+
+🔀 [Controller] Route: course_planning
+📋 [Controller] Context length: 77 chars
+╭───────────────────────── 🚀 Crew Execution Started ──────────────────────────╮
+│                                                                              │
+│  Crew Execution Started                                                      │
+│  Name: crew                                                                  │
+│  ID: 55de6f0c-2047-4ea1-874a-69a2043d8878                                    │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭────────────────────────────── 📋 Task Started ───────────────────────────────╮
+│                                                                              │
+│  Task Started                                                                │
+│  Name: Search the Stanford catalog for documents needed to answer the        │
+│  student's question.                                                         │
+│                                                                              │
+│  === CURRENT QUERY ===                                                       │
+│  Can I take CS161 if I have completed CS106A and CS106B?                     │
+│                                                                              │
+│  Use the Catalog Search Tool. For prerequisite questions, also search for    │
+│  each prerequisite course. Return all docs with URLs.                        │
+│  Keep your response concise — just the retrieved facts and URLs.             │
+│  ID: f9e5c026-6af2-40c4-9817-096896962c6f                                    │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭────────────────────────────── 🤖 Agent Started ──────────────────────────────╮
+│                                                                              │
+│  Agent: Catalog Researcher                                                   │
+│                                                                              │
+│  Task: Search the Stanford catalog for documents needed to answer the        │
+│  student's question.                                                         │
+│                                                                              │
+│  === CURRENT QUERY ===                                                       │
+│  Can I take CS161 if I have completed CS106A and CS106B?                     │
+│                                                                              │
+│  Use the Catalog Search Tool. For prerequisite questions, also search for    │
+│  each prerequisite course. Return all docs with URLs.                        │
+│  Keep your response concise — just the retrieved facts and URLs.             │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────────────── 🔧 Tool Execution Started (#1) ───────────────────────╮
+│                                                                              │
+│  Tool: catalog_search_tool                                                   │
+│  Args: {'query': 'CS106A'}                                                   │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────────────── 🔧 Tool Execution Started (#2) ───────────────────────╮
+│                                                                              │
+│  Tool: catalog_search_tool                                                   │
+│  Args: {'query': 'CS161'}                                                    │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────── 🔧 Tool Execution Started (#3) ───────────────────────╮
+│                                                                              │
+│  Tool: catalog_search_tool                                                   │
+│  Args: {'query': 'CS106B'}                                                   │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 7018.90it/s]
+[1mBertModel LOAD REPORT[0m from: BAAI/bge-base-en-v1.5
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 199/199 [00:00<00:00, 7309.45it/s]
+Loading weights: 100%|██████████| 199/199 [00:00<00:00, 7754.39it/s]
+[1mBertModel LOAD REPORT[0m from: BAAI/bge-base-en-v1.5
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[1mBertModel LOAD REPORT[0m from: BAAI/bge-base-en-v1.5
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+╭────────────────────── ✅ Tool Execution Completed (#3) ──────────────────────╮
+│                                                                              │
+│  Tool Completed                                                              │
+│  Tool: catalog_search_tool                                                   │
+│  Output: [1] CS161 - Design and Analysis of Algorithms                       │
+│  URL: https://explorecourses.stanford.edu/search?q=CS161                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS161                                                               │
+│  TITLE: Design and Analysis of Algorithms                                    │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Worst and average case analysis. Recurrences and asymptotics. Efficient     │
+│  algorithms for sorting, searching, and selection. Data structures: binary   │
+│  search trees, heaps, hash tables, balanced trees.                           │
+│                                                                              │
+│  [2] CS106A - Programming Methodology                                        │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106A                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106A                                                              │
+│  TITLE: Programming Methodology                                              │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the engineering of computer applications emphasizing        │
+│  modern software engineering principles: object-oriented design,             │
+│  decomposition, encapsulation, abstraction, and testing. Uses the Python     │
+│                                                                              │
+│  [3] CS221 - Artificial Intelligence: Principles and Techniques              │
+│  URL: https://explorecourses.stanford.edu/search?q=CS221                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS221                                                               │
+│  TITLE: Artificial Intelligence: Principles and Techniques                   │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Foundational topics in artificial intelligence including search algorithms  │
+│  (BFS, DFS, A*, iterative deepening), adversarial game playing (minimax,     │
+│  alpha-beta pruning), Markov dec                                             │
+│                                                                              │
+│  [4] CS107 - Computer Organization and Systems                               │
+│  URL: https://explorecourses.stanford.edu/search?q=CS107                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS107                                                               │
+│  TITLE: Computer Organization and Systems                                    │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the fundamental concepts of computer systems. Explores how  │
+│  computer systems execute programs, store information, and communicate.      │
+│  Topics include C and assembly language programmin                           │
+│                                                                              │
+│  [5] CS144 - Introduction to Computer Networking                             │
+│  URL: https://explorecourses.stanford.edu/search?q=CS144                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS144                                                               │
+│  TITLE: Introduction to Computer Networking                                  │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Principles and practice of computer networking, with emphasis on the        │
+│  Internet. Topics include layered architectures, TCP/IP protocol suite,      │
+│  HTTP, DNS, routing algorithms, congestion control, re                       │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+[32mTool catalog_search_tool executed with result: [1] CS161 - Design and Analysis of Algorithms
+URL: https://explorecourses.stanford.edu/search?q=CS161
+TYPE: course
+
+COURSE: CS161
+TITLE: Design and Analysis of Algorithms
+
+LEVEL: undergraduate
+
+DESCRI...[0m
+[32mTool catalog_search_tool executed with result: [1] CS106A - Programming Methodology
+URL: https://explorecourses.stanford.edu/search?q=CS106A
+TYPE: course
+
+COURSE: CS106A
+TITLE: Programming Methodology
+
+LEVEL: undergraduate
+
+DESCRIPTION:
+Introducti...[0m
+[32mTool catalog_search_tool executed with result: [1] CS106B - Programming Abstractions
+URL: https://explorecourses.stanford.edu/search?q=CS106B
+TYPE: course
+
+COURSE: CS106B
+TITLE: Programming Abstractions
+
+LEVEL: undergraduate
+
+DESCRIPTION:
+Abstract...[0m
+
+╭────────────────────── ✅ Tool Execution Completed (#3) ──────────────────────╮
+│                                                                              │
+│  Tool Completed                                                              │
+│  Tool: catalog_search_tool                                                   │
+│  Output: [1] CS106A - Programming Methodology                                │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106A                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106A                                                              │
+│  TITLE: Programming Methodology                                              │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the engineering of computer applications emphasizing        │
+│  modern software engineering principles: object-oriented design,             │
+│  decomposition, encapsulation, abstraction, and testing. Uses the Python     │
+│                                                                              │
+│  [2] CS107 - Computer Organization and Systems                               │
+│  URL: https://explorecourses.stanford.edu/search?q=CS107                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS107                                                               │
+│  TITLE: Computer Organization and Systems                                    │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the fundamental concepts of computer systems. Explores how  │
+│  computer systems execute programs, store information, and communicate.      │
+│  Topics include C and assembly language programmin                           │
+│                                                                              │
+│  [3] CS106B - Programming Abstractions                                       │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106B                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106B                                                              │
+│  TITLE: Programming Abstractions                                             │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Abstraction and its relation to programming. Software engineering           │
+│  principles of data abstraction and modularity. Object-oriented              │
+│  programming, fundamental data structures (stacks, queues, sets) and data-d  │
+│                                                                              │
+│  [4] CS246 - Mining Massive Data Sets                                        │
+│  URL: https://explorecourses.stanford.edu/search?q=CS246                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS246                                                               │
+│  TITLE: Mining Massive Data Sets                                             │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Design of efficient algorithms for processing massive datasets that do not  │
+│  fit in main memory. Topics include MapReduce/Spark, locality-sensitive      │
+│  hashing, dimensionality reduction, recommendation systems,                  │
+│                                                                              │
+│  [5] CS109 - Introduction to Probability for Computer Scientists             │
+│  URL: https://explorecourses.stanford.edu/search?q=CS109                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS109                                                               │
+│  TITLE: Introduction to Probability for Computer Scientists                  │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Topics include: counting and combinatorics, random variables, conditional   │
+│  probability, independence, distributions (including Bernoulli, binomial,    │
+│  geometric, Poisson, uniform, e                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────── ✅ Tool Execution Completed (#3) ──────────────────────╮
+│                                                                              │
+│  Tool Completed                                                              │
+│  Tool: catalog_search_tool                                                   │
+│  Output: [1] CS106B - Programming Abstractions                               │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106B                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106B                                                              │
+│  TITLE: Programming Abstractions                                             │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Abstraction and its relation to programming. Software engineering           │
+│  principles of data abstraction and modularity. Object-oriented              │
+│  programming, fundamental data structures (stacks, queues, sets) and data-d  │
+│                                                                              │
+│  [2] CS106A - Programming Methodology                                        │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106A                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106A                                                              │
+│  TITLE: Programming Methodology                                              │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the engineering of computer applications emphasizing        │
+│  modern software engineering principles: object-oriented design,             │
+│  decomposition, encapsulation, abstraction, and testing. Uses the Python     │
+│                                                                              │
+│  [3] CS107 - Computer Organization and Systems                               │
+│  URL: https://explorecourses.stanford.edu/search?q=CS107                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS107                                                               │
+│  TITLE: Computer Organization and Systems                                    │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the fundamental concepts of computer systems. Explores how  │
+│  computer systems execute programs, store information, and communicate.      │
+│  Topics include C and assembly language programmin                           │
+│                                                                              │
+│  [4] CS246 - Mining Massive Data Sets                                        │
+│  URL: https://explorecourses.stanford.edu/search?q=CS246                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS246                                                               │
+│  TITLE: Mining Massive Data Sets                                             │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Design of efficient algorithms for processing massive datasets that do not  │
+│  fit in main memory. Topics include MapReduce/Spark, locality-sensitive      │
+│  hashing, dimensionality reduction, recommendation systems,                  │
+│                                                                              │
+│  [5] CS109 - Introduction to Probability for Computer Scientists             │
+│  URL: https://explorecourses.stanford.edu/search?q=CS109                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS109                                                               │
+│  TITLE: Introduction to Probability for Computer Scientists                  │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Topics include: counting and combinatorics, random variables, conditional   │
+│  probability, independence, distributions (including Bernoulli, binomial,    │
+│  geometric, Poisson, uniform, e                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────── ✅ Agent Final Answer ────────────────────────────╮
+│                                                                              │
+│  Agent: Catalog Researcher                                                   │
+│                                                                              │
+│  Final Answer:                                                               │
+│  CS161 - Design and Analysis of Algorithms                                   │
+│  URL: https://explorecourses.stanford.edu/search?q=CS161                     │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS161                                                               │
+│  TITLE: Design and Analysis of Algorithms                                    │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Worst and average case analysis. Recurrences and asymptotics. Efficient     │
+│  algorithms for sorting, searching, and selection. Data structures: binary   │
+│  search trees, heaps, hash tables, balanced trees.                           │
+│                                                                              │
+│  PREREQUISITES:                                                              │
+│  CS106A and CS106B are recommended.                                          │
+│                                                                              │
+│  CS106A - Programming Methodology                                            │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106A                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106A                                                              │
+│  TITLE: Programming Methodology                                              │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Introduction to the engineering of computer applications emphasizing        │
+│  modern software engineering principles: object-oriented design,             │
+│  decomposition, encapsulation, abstraction, and testing. Uses the Python     │
+│  programming language.                                                       │
+│                                                                              │
+│  CS106B - Programming Abstractions                                           │
+│  URL: https://explorecourses.stanford.edu/search?q=CS106B                    │
+│  TYPE: course                                                                │
+│                                                                              │
+│  COURSE: CS106B                                                              │
+│  TITLE: Programming Abstractions                                             │
+│                                                                              │
+│  LEVEL: undergraduate                                                        │
+│                                                                              │
+│  DESCRIPTION:                                                                │
+│  Abstraction and its relation to programming. Software engineering           │
+│  principles of data abstraction and modularity. Object-oriented              │
+│  programming, fundamental data structures (stacks, queues, sets) and data    │
+│  structures. Uses the Java programming language.                             │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+[CrewAIEventsBus] Warning: Event pairing mismatch. 'agent_execution_completed' 
+closed 'llm_call_started' (expected 'agent_execution_started')
+[CrewAIEventsBus] Warning: Event pairing mismatch. 'task_completed' closed 
+'agent_execution_started' (expected 'task_started')
+╭───────────────────────────── 📋 Task Completion ─────────────────────────────╮
+│                                                                              │
+│  Task Completed                                                              │
+│  Name: Search the Stanford catalog for documents needed to answer the        │
+│  student's question.                                                         │
+│                                                                              │
+│  === CURRENT QUERY ===                                                       │
+│  Can I take CS161 if I have completed CS106A and CS106B?                     │
+│                                                                              │
+│  Use the Catalog Search Tool. For prerequisite questions, also search for    │
+│  each prerequisite course. Return all docs with URLs.                        │
+│  Keep your response concise — just the retrieved facts and URLs.             │
+│  Agent: Catalog Researcher                                                   │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭────────────────────────────── 📋 Task Started ───────────────────────────────╮
+│                                                                              │
+│  Task Started                                                                │
+│  Name: Using ONLY the retrieved catalog docs, answer the student's           │
+│  question.                                                                   │
+│                                                                              │
+│  === CURRENT QUERY ===                                                       │
+│  Can I take CS161 if I have completed CS106A and CS106B?                     │
+│                                                                              │
+│  Rules:                                                                      │
+│  - Use only retrieved info. Cite URLs for every claim.                       │
+│  - If not in docs, say 'I don't have that information.'                      │
+│  - If conversation state is provided above, use it to maintain context       │
+│  (e.g. remember which courses the student has completed from prior turns).   │
+│  - Update the memory state with any new information from this turn.          │
+│                                                                              │
+│  Your answer field should contain:                                           │
+│  Answer / Plan: [Decision]                                                   │
+│  Why (requirements/prereqs satisfied): [Reasoning with URLs]                 │
+│  Citations:                                                                  │
+│  - [URL] - [Doc name]                                                        │
+│  Clarifying questions (if needed): [Questions or N/A]                        │
+│  Assumptions / Not in catalog: [Any gaps]                                    │
+│  ID: b97bfe31-74bd-4a49-9cc2-ed9e7915a0f4                                    │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭────────────────────────────── 🤖 Agent Started ──────────────────────────────╮
+│                                                                              │
+│  Agent: Academic Advisor                                                     │
+│                                                                              │
+│  Task: Using ONLY the retrieved catalog docs, answer the student's           │
+│  question.                                                                   │
+│                                                                              │
+│  === CURRENT QUERY ===                                                       │
+│  Can I take CS161 if I have completed CS106A and CS106B?                     │
+│                                                                              │
+│  Rules:                                                                      │
+│  - Use only retrieved info. Cite URLs for every claim.                       │
+│  - If not in docs, say 'I don't have that information.'                      │
+│  - If conversation state is provided above, use it to maintain context       │
+│  (e.g. remember which courses the student has completed from prior turns).   │
+│  - Update the memory state with any new information from this turn.          │
+│                                                                              │
+│  Your answer field should contain:                                           │
+│  Answer / Plan: [Decision]                                                   │
+│  Why (requirements/prereqs satisfied): [Reasoning with URLs]                 │
+│  Citations:                                                                  │
+│  - [URL] - [Doc name]                                                        │
+│  Clarifying questions (if needed): [Questions or N/A]                        │
+│  Assumptions / Not in catalog: [Any gaps]                                    │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────────────────── ✅ Agent Final Answer ────────────────────────────╮
+│                                                                              │
+│  Agent: Academic Advisor                                                     │
+│                                                                              │
+│  Final Answer:                                                               │
+│  {                                                                           │
+│    "answer": "Answer / Plan: You are not explicitly eligible to take CS161   │
+│  with the completed courses CS106A and CS106B, as they are only              │
+│  recommended, not required. Why (requirements/prereqs satisfied): The        │
+│  prerequisites for CS161 state that CS106A and CS106B are recommended, but   │
+│  it does not explicitly state they are required                              │
+│  (https://explorecourses.stanford.edu/search?q=CS161). Citations: -          │
+│  https://explorecourses.stanford.edu/search?q=CS161 - Design and Analysis    │
+│  of Algorithms, - https://explorecourses.stanford.edu/search?q=CS106A -      │
+│  Programming Methodology, -                                                  │
+│  https://explorecourses.stanford.edu/search?q=CS106B - Programming           │
+│  Abstractions. Clarifying questions: Are there any other requirements or     │
+│  recommendations for taking CS161 that are not listed in the course          │
+│  catalog? Assumptions / Not in catalog: It is assumed that the student has   │
+│  met any other implicit or non-course related prerequisites, but this        │
+│  information is not available in the provided catalog.",                     │
+│    "memory": {                                                               │
+│      "last_topic": "prerequisite check for CS161",                           │
+│      "courses_discussed": ["CS161", "CS106A", "CS106B"],                     │
+│      "completed_courses": ["CS106A", "CS106B"],                              │
+│      "target_course": "CS161",                                               │
+│      "query_type": "prerequisite_check",                                     │
+│      "eligibility_result": "not_eligible",                                   │
+│      "turn_count": 1                                                         │
+│    }                                                                         │
+│  }                                                                           │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────── 📋 Task Completion ─────────────────────────────╮
+│                                                                              │
+│  Task Completed                                                              │
+│  Name: Using ONLY the retrieved catalog docs, answer the student's           │
+│  question.                                                                   │
+│                                                                              │
+│  === CURRENT QUERY ===                                                       │
+│  Can I take CS161 if I have completed CS106A and CS106B?                     │
+│                                                                              │
+│  Rules:                                                                      │
+│  - Use only retrieved info. Cite URLs for every claim.                       │
+│  - If not in docs, say 'I don't have that information.'                      │
+│  - If conversation state is provided above, use it to maintain context       │
+│  (e.g. remember which courses the student has completed from prior turns).   │
+│  - Update the memory state with any new information from this turn.          │
+│                                                                              │
+│  Your answer field should contain:                                           │
+│  Answer / Plan: [Decision]                                                   │
+│  Why (requirements/prereqs satisfied): [Reasoning with URLs]                 │
+│  Citations:                                                                  │
+│  - [URL] - [Doc name]                                                        │
+│  Clarifying questions (if needed): [Questions or N/A]                        │
+│  Assumptions / Not in catalog: [Any gaps]                                    │
+│  Agent: Academic Advisor                                                     │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+[CrewAIEventsBus] Warning: Event pairing mismatch. 'crew_kickoff_completed' 
+closed 'task_started' (expected 'crew_kickoff_started')
+╭────────────────────────────── Crew Completion ───────────────────────────────╮
+│                                                                              │
+│  Crew Execution Completed                                                    │
+│  Name: crew                                                                  │
+│  ID: 55de6f0c-2047-4ea1-874a-69a2043d8878                                    │
+│  Final Output: {                                                             │
+│    "answer": "Answer / Plan: You are not explicitly eligible to take CS161   │
+│  with the completed courses CS106A and CS106B, as they are only              │
+│  recommended, not required. Why (requirements/prereqs satisfied): The        │
+│  prerequisites for CS161 state that CS106A and CS106B are recommended, but   │
+│  it does not explicitly state they are required                              │
+│  (https://explorecourses.stanford.edu/search?q=CS161). Citations: -          │
+│  https://explorecourses.stanford.edu/search?q=CS161 - Design and Analysis    │
+│  of Algorithms, - https://explorecourses.stanford.edu/search?q=CS106A -      │
+│  Programming Methodology, -                                                  │
+│  https://explorecourses.stanford.edu/search?q=CS106B - Programming           │
+│  Abstractions. Clarifying questions: Are there any other requirements or     │
+│  recommendations for taking CS161 that are not listed in the course          │
+│  catalog? Assumptions / Not in catalog: It is assumed that the student has   │
+│  met any other implicit or non-course related prerequisites, but this        │
+│  information is not available in the provided catalog.",                     │
+│    "memory": {                                                               │
+│      "last_topic": "prerequisite check for CS161",                           │
+│      "courses_discussed": ["CS161", "CS106A", "CS106B"],                     │
+│      "completed_courses": ["CS106A", "CS106B"],                              │
+│      "target_course": "CS161",                                               │
+│      "query_type": "prerequisite_check",                                     │
+│      "eligibility_result": "not_eligible",                                   │
+│      "turn_count": 1                                                         │
+│    }                                                                         │
+│  }                                                                           │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+======================================================================
+FINAL ANSWER:
+======================================================================
+Answer / Plan: You are not explicitly eligible to take CS161 with the completed courses CS106A and CS106B, as they are only recommended, not required. Why (requirements/prereqs satisfied): The prerequisites for CS161 state that CS106A and CS106B are recommended, but it does not explicitly state they are required (https://explorecourses.stanford.edu/search?q=CS161). Citations: - https://explorecourses.stanford.edu/search?q=CS161 - Design and Analysis of Algorithms, - https://explorecourses.stanford.edu/search?q=CS106A - Programming Methodology, - https://explorecourses.stanford.edu/search?q=CS106B - Programming Abstractions. Clarifying questions: Are there any other requirements or recommendations for taking CS161 that are not listed in the course catalog? Assumptions / Not in catalog: It is assumed that the student has met any other implicit or non-course related prerequisites, but this information is not available in the provided catalog.
+
+Route: course_planning
+Memory: {
+  "last_topic": "prerequisite check for CS161",
+  "courses_discussed": [
+    "CS161",
+    "CS106A",
+    "CS106B"
+  ],
+  "completed_courses": [
+    "CS106A",
+    "CS106B"
+  ],
+  "target_course": "CS161",
+  "query_type": "prerequisite_check",
+  "eligibility_result": "not_eligible",
+  "turn_count": 1
+}
+╭─────────────────────────────── Tracing Status ───────────────────────────────╮
+│                                                                              │
+│  Info: Tracing is disabled.                                                  │
+│                                                                              │
+│  To enable tracing, do any one of these:                                     │
+│  • Set tracing=True in your Crew/Flow code                                   │
+│  • Set CREWAI_TRACING_ENABLED=true in your project's .env file               │
+│  • Run: crewai traces enable                                                 │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
